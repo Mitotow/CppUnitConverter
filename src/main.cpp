@@ -2,7 +2,7 @@
 
 int main(int nbrArgs, char* args[]) {
     Controller controller;
-    controller.run();
+    Controller::run();
 
     return 0;
 }

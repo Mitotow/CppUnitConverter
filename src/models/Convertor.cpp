@@ -3,13 +3,12 @@
 //
 
 #include <algorithm>
-#include <iostream>
 #include <tuple>
 #include <cmath>
 #include <stdexcept>
 #include "Convertor.h"
 
-double Convertor::convert(double dval, std::string dtype, std::string etype) {
+double Convertor::convert(double dval, const std::string& dtype, const std::string& etype) {
     std::tuple<int, bool> dtypeinfo = Convertor::getTypeIndex(dtype);
     std::tuple<int, bool> etypeinfo = Convertor::getTypeIndex(etype);
 
@@ -24,22 +23,22 @@ double Convertor::convert(double dval, std::string dtype, std::string etype) {
     if(isDMetrics) {
         double val = dval/std::pow(10, dindex);
         if(!isEMetrics) {
-            double emi = this->kmToMi(val);
-            return this->miToLower(emi, eindex);
+            double emi = kmToMi(val);
+            return miToLower(emi, eindex);
         }
         return val;
     }
 
     double val = lowerToMi(dval, dindex);
     if(isEMetrics) {
-        double ekm = this->miToKm(val);
+        double ekm = miToKm(val);
         return ekm*std::pow(10, eindex);
     }
 
     return val;
 }
 
-std::tuple<int, bool> Convertor::getTypeIndex(const std::string stype) {
+std::tuple<int, bool> Convertor::getTypeIndex(const std::string& stype) {
     int index = -1;
     bool isMetric = false;
 

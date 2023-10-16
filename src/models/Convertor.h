@@ -11,17 +11,15 @@
 
 class Convertor {
 public:
-    double convert(double dval, std::string dtype, std::string etype);
+    double convert(double dval, const std::string& dtype, const std::string& etype);
 private:
     const std::vector<std::string> metrics = {"km", "hm", "dam", "m", "dm", "cm", "mm", "um", "nm"};
     const std::vector<std::string> imperials = {"mile", "yard", "feet", "inch"};
-    const double MITOKM = 1.609344;
-    const double KMTOMI = 0.62137119;
-    std::tuple<int, bool> getTypeIndex(std::string type);
-    double kmToMi(const double km);
-    double miToKm(const double mi);
-    double miToLower(const double mi, const int tindex);
-    double lowerToMi(const double lower, const int tindex);
+    std::tuple<int, bool> getTypeIndex(const std::string& type);
+    static double kmToMi(double km);
+    static double miToKm(double mi);
+    static double miToLower(double mi, int tindex);
+    static double lowerToMi(double lower, int tindex);
 };
 
 

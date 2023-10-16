@@ -11,7 +11,8 @@
 void Controller::run() {
     Convertor convertor;
     std::string message = "Welcome to the Metrics/Imperials convertor. \n"
-                          "Enter the value to be converted followed by its type\n"
+                          "Enter the value to be converted followed by its type and the type to be converted in.\n"
+                          "Exemple : 1 km mile --> 0.621371 mile\n"
                           "Enter quit to leave\n"
                           "Metrics units : km, hm, dam, m, dm, cm, mm, um, nm\n"
                           "Imperials units : mile, yard, feet, inche";
@@ -43,12 +44,13 @@ void Controller::run() {
         }
 
         if(valid) {
-            double dvalue = std::atof(args[0].c_str());
+            double dvalue;
             double result;
             try {
+                dvalue = std::stof(args[0]);
                 result = convertor.convert(dvalue, args[1], args[2]);
             } catch(std::invalid_argument& e) {
-                ConsoleView::displayMessage("Invalid type");
+                ConsoleView::displayMessage("Invalid number or Invalid type");
                 continue;
             }
             ConsoleView::displayMessage("Result : " + std::to_string(result) + " " + args[2]);
